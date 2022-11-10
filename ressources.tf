@@ -3,10 +3,11 @@ resource "aws_instance" "app_server" {
   ami           = lookup(var.image_id, var.region)
   instance_type = var.app_server_instance_type
 
-  tags = {
-    Name       = var.server_names[count.index]
-    costcenter = "42"
-  }
+  tags = merge(
+    {
+      Name = var.server_names[count.index]
+    }, var.common_tags
+  )
 }
 
 resource "aws_instance" "db_server" {
