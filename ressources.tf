@@ -1,11 +1,12 @@
 resource "aws_instance" "app_server" {
-  count         = length(var.server_names)
+  count         = var.node_count
   ami           = lookup(var.image_id, var.region)
   instance_type = var.app_server_instance_type
 
-  tags = merge(
-    {
-      Name = var.server_names[count.index]
+  user_data = file("install_webserver.sh")
+
+  tags = merge({
+    Name = "Webserver ${count.index + 1}"
     }, var.common_tags
   )
 }

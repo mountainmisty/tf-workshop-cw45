@@ -1,6 +1,6 @@
 variable "region" {
   type    = string
-  default = "eu-west-1"
+  default = "eu-central-1"
 }
 
 variable "app_server_instance_type" {
