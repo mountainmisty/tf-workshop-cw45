@@ -16,13 +16,13 @@ resource "aws_security_group" "web-access" {
   description = "Allow port 80 access from outside world"
 
   dynamic "ingress" {
-    for_each = var.ingress-ports
+    for_each = var.ingress-rules
     content {
-      description = "This Rule Number ${ingress.key + 1}, we open Port ${ingress.value} to the world"
-      from_port   = ingress.value
-      to_port     = ingress.value
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      description = ingress.key
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
     }
   }
 

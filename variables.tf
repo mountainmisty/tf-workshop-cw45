@@ -44,7 +44,23 @@ variable "common_tags" {
   }
 }
 
-variable "ingress-ports" {
-  type    = list(number)
-  default = [80, 22, 443]
+variable "ingress-rules" {
+  type = map(any)
+  default = {
+    "Rule Number 1" = {
+      port        = 80,
+      cidr_blocks = ["0.0.0.0/0"],
+      protocol    = "tcp"
+    },
+    "Rule Number 2" = {
+      port        = 22,
+      cidr_blocks = ["10.0.0.0/16"],
+      protocol    = "tcp"
+    },
+    "Rule Number 3" = {
+      port        = 443,
+      cidr_blocks = ["0.0.0.0/0"],
+      protocol    = "tcp"
+    }
+  }
 }
