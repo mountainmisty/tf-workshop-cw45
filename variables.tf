@@ -64,3 +64,8 @@ variable "ingress-rules" {
     }
   }
 }
+
+
+variable "hosting-bucket" {
+  default = "zh-mro-website"
+}
