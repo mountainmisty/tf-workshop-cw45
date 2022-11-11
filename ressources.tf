@@ -1,6 +1,6 @@
 resource "aws_instance" "app_server" {
   count           = var.node_count
-  ami             = lookup(var.image_id, var.region)
+  ami             = data.aws_ami.amazon-linux-2.id
   instance_type   = var.app_server_instance_type
   security_groups = [aws_security_group.web-access.name]
   user_data       = file("install_webserver.sh")
