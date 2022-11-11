@@ -9,6 +9,11 @@ resource "aws_instance" "app_server" {
     Name = "Webserver ${count.index + 1}"
     }, var.common_tags
   )
+
+  depends_on = [
+    aws_instance.db_server
+  ]
+
 }
 
 resource "aws_security_group" "web-access" {
