@@ -56,16 +56,11 @@ variable "ingress-rules" {
       port        = 22,
       cidr_blocks = ["10.0.0.0/16"],
       protocol    = "tcp"
-    },
-    "Rule Number 3" = {
-      port        = 443,
-      cidr_blocks = ["0.0.0.0/0"],
-      protocol    = "tcp"
     }
   }
 }
 
 
 variable "hosting-bucket" {
-  default = "zh-mro-website"
+  default = "www.trainer.aws.zhtraining.de"
 }

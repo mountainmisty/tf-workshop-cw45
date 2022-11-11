@@ -34,3 +34,18 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.bucket.id
   policy = templatefile("s3-hosting-plcy.tpl", { bucket_name = var.hosting-bucket })
 }
+
+data "aws_route53_zone" "zone" {
+  name = "trainer.aws.zhtraining.de"
+}
+
+resource "aws_route53_record" "website-record" {
+  zone_id = data.aws_route53_zone.zone.zone_id
+  name    = "www.trainer.aws.zhtraining.de"
+  type    = "A"
+  alias {
+    name                   = aws_s3_bucket.bucket.website_endpoint
+    zone_id                = aws_s3_bucket.bucket.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
