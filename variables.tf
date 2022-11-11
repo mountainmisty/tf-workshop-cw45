@@ -43,3 +43,8 @@ variable "common_tags" {
     Application = "Intranet-Portal"
   }
 }
+
+variable "ingress-ports" {
+  type    = list(number)
+  default = [80, 22, 443]
+}
